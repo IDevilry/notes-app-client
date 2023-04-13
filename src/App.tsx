@@ -1,26 +1,27 @@
-import {useQuery} from '@apollo/client'
-import { getNotes } from './api/getNotes'
-import {Note} from './api/types'
+import { Routes, Route } from 'react-router-dom'
+import { 
+  Favorites,
+  Home,
+  NotFound,
+  Note,
+  Profile
+} from './pages'
+import { Layout } from './components/Layout'
 
-
-const App = () => {
-
-
-  const { data, loading, error } = useQuery<Note>(getNotes)
+const App: React.FC = () => {
   return (
-    
-      <div>{
-        data?.notes.map(note => (
-          <ul key={note.id}>
-            <li>{note.title}</li>
-            <li>{note.content}</li>
-            <li>{note.createdAt}</li>
-            <li>{note.updatedAt}</li>
-          </ul>
-        ))
-        }</div>
-
-    
+    <Routes>
+      <Route path="/" element={<Layout/>}>
+        <Route index element={<Home />} />
+        <Route path='profile' element={<Profile />} />
+        <Route path='profile/:id' element={<Profile />} />
+        <Route path='favorites' element={<Favorites />} />
+        <Route path='favorites/:id' element={<Favorites />} />
+        <Route path='note' element={<Note/>} />
+        <Route path='note/:id' element={<Note/>} />
+        <Route path='*' element={<NotFound />} />
+      </Route>
+    </Routes>
   )
 }
 
