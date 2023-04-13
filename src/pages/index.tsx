@@ -1,7 +1,17 @@
-import Favorites from './Favorites'
-import Home from './Home'
-import Profile from './Profile'
-import NotFound from './NotFound'
-import Note from './Note'
+import Favorites from './Favorites/Favorites'
+import Home from './Home/Home'
+import Profile from './Profile/Profile'
+import NotFound from './NotFound/NotFound'
+import Note from './Note/Note'
+import SignUp from './Auth/SignUp'
+import SignIn from './Auth/SignIn'
 
-export {Favorites, Home, Profile, NotFound, Note}
+export {
+    Favorites,
+    Home,
+    Profile,
+    NotFound,
+    Note,
+    SignUp,
+    SignIn
+}
