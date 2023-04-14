@@ -5,6 +5,7 @@ import {
   NotFound,
   Note,
   Profile,
+  SignIn,
   SignUp
 } from './pages'
 import { Layout } from './components/Layout'
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Route path='note' element={<Note/>} />
         <Route path='note/:id' element={<Note/>} />
         <Route path='reg' element={<SignUp />} />
+        <Route path='login' element={<SignIn />} />
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>
