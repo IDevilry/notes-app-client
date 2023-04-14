@@ -35,18 +35,16 @@ const SignUp: React.FC = () => {
       <Form handleSubmit={handleSubmit}>
         <Input
           type="text"
-          required
-          placeholder="Имя пользователя"
-          name="username"
+          required={true}
+          htmlForName="username"
           onChange={(e) => handleChange(e)}
         >
           Имя пользователя:
         </Input>
         <Input
           type="email"
-          required
-          placeholder="Почта"
-          name="email"
+          required={true}
+          htmlForName="email"
           onChange={(e) => handleChange(e)}
         >
           Электронная почта:
@@ -54,9 +52,8 @@ const SignUp: React.FC = () => {
 
         <Input
           type="password"
-          required
-          placeholder="Пароль"
-          name="password"
+          required={true}
+          htmlForName="password"
           onChange={(e) => handleChange(e)}
         >
           Пароль:

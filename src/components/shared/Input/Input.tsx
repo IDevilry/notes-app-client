@@ -5,13 +5,13 @@ interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   required?: boolean;
-  name?: string;
+  htmlForName?: string;
   children?: string;
 }
 
 const Input: React.FC<InputProps> = ({
   children,
-  name,
+  htmlForName,
   placeholder,
   type,
   onChange,
@@ -21,9 +21,12 @@ const Input: React.FC<InputProps> = ({
     <>
       {children ? (
         <>
-          <label htmlFor={name}>{children}</label>
+          <label htmlFor={htmlForName} className="text-[16px] font-medium underline">
+            {children}
+          </label>
           <input
-            name={name}
+            className="max-w-[240px] bg-amber-300 p-3 rounded-xl placeholder:text-sky-500"
+            name={htmlForName}
             type={type}
             placeholder={placeholder}
             onChange={onChange}

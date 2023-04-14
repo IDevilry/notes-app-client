@@ -2,6 +2,7 @@ import {
   validateEmail,
   validatePassword,
   validateUsername,
+  validateFormData,
 } from "./validateForm";
 
 describe("Validate form", () => {
@@ -22,5 +23,35 @@ describe("Validate form", () => {
   it("validate password", () => {
     expect(validatePassword("IDevilry")).toBeTruthy();
     expect(validatePassword("IDev")).toBeFalsy();
+  });
+  it("validate Form Data", () => {
+    expect(
+      validateFormData({
+        email: "idevilry@iddev.com",
+        username: "idevilry",
+        password: "password",
+      })
+    ).toBeTruthy();
+    expect(
+      validateFormData({
+        email: "idevilry@iddevcom",
+        username: "idevilry",
+        password: "password",
+      })
+    ).toBe("Некорректный email");
+    expect(
+      validateFormData({
+        email: "idevilry@iddev.com",
+        username: "id",
+        password: "password",
+      })
+    ).toBe("Некорректное имя пользователя");
+    expect(
+      validateFormData({
+        email: "idevilry@iddev.com",
+        username: "iasssssd",
+        password: "asd",
+      })
+    ).toBe("Слишком короткий пароль");
   });
 });

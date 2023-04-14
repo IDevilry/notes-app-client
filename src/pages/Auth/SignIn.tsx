@@ -10,7 +10,7 @@ const SignIn: React.FC = () => {
     <Form handleSubmit={handleSubmit}>
       <Input
         type="email"
-        name="email"
+        htmlForName="email"
         required
         placeholder="Электронная почта"
         onChange={handleChange}
@@ -19,14 +19,14 @@ const SignIn: React.FC = () => {
       </Input>
       <Input
         type="password"
-        name="password"
+        htmlForName="password"
         required
         placeholder="Пароль"
         onChange={handleChange}
       >
         Пароль
       </Input>
-      <Button type='submit'>Войти</Button>
+      <Button type="submit">Войти</Button>
     </Form>
   );
 };

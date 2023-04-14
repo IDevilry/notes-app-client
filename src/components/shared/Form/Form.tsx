@@ -6,7 +6,14 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ children, handleSubmit }: FormProps) => {
-  return <form onSubmit={handleSubmit}>{children}</form>;
+  return (
+    <form
+      className="flex flex-col gap-4 items-center justify-center"
+      onSubmit={handleSubmit}
+    >
+      {children}
+    </form>
+  );
 };
 
 export default Form;

@@ -4,17 +4,22 @@ interface ButtonProps {
   children: string;
   type: "button" | "submit" | "reset";
   disabled?: boolean;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  handleClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button: React.FC<ButtonProps> = ({
   type,
   children,
   disabled,
-  onClick,
+  handleClick,
 }: ButtonProps) => {
   return (
-    <button onClick={onClick} type={type} disabled={disabled}>
+    <button
+      onClick={handleClick}
+      type={type}
+      disabled={disabled}
+      className="flex items-center p-4 bg-sky-600 rounded-xl text-white text-[16px]"
+    >
       {children}
     </button>
   );
