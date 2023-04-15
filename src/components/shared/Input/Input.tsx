@@ -1,13 +1,23 @@
 import React from "react";
 
-interface InputProps {
+type CommonInputProps = {
   type: "text" | "password" | "email";
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   required?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+type PropsWithLabel = CommonInputProps & {
   htmlForName?: string;
   children?: string;
-}
+};
+
+type PropsWithoutLabel = CommonInputProps & {
+  htmlForName?: never;
+  children?: never;
+};
+
+type InputProps = PropsWithoutLabel | PropsWithLabel;
 
 const Input: React.FC<InputProps> = ({
   children,
@@ -16,12 +26,15 @@ const Input: React.FC<InputProps> = ({
   type,
   onChange,
   required,
-}: InputProps) => {
+}) => {
   return (
     <>
       {children ? (
         <>
-          <label htmlFor={htmlForName} className="text-[16px] font-medium underline">
+          <label
+            htmlFor={htmlForName}
+            className="text-[16px] font-medium underline"
+          >
             {children}
           </label>
           <input
