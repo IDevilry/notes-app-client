@@ -3,12 +3,12 @@ import {
   Favorites,
   Home,
   NotFound,
-  Note,
+  SingleNote,
   Profile,
   SignIn,
   SignUp,
 } from "./pages";
-import { Layout } from "./components/Layout";
+import { Layout } from "./components/layout";
 import { RequireAuth } from "./providers/requireAuth";
 
 const App: React.FC = () => {
@@ -39,7 +39,7 @@ const App: React.FC = () => {
           path="note/:id"
           element={
             <RequireAuth>
-              <Note />
+              <SingleNote />
             </RequireAuth>
           }
         />

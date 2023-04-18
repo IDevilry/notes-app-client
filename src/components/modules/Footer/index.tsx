@@ -4,4 +4,4 @@ const Footer: React.FC = () => {
   return <div></div>;
 };
 
-export { Footer };
+export default Footer;
