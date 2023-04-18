@@ -1,32 +1,55 @@
-import { Routes, Route } from 'react-router-dom'
-import { 
+import { Routes, Route } from "react-router-dom";
+import {
   Favorites,
   Home,
   NotFound,
   Note,
   Profile,
   SignIn,
-  SignUp
-} from './pages'
-import { Layout } from './components/Layout'
+  SignUp,
+} from "./pages";
+import { Layout } from "./components/Layout";
+import { RequireAuth } from "./providers/requireAuth";
 
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout/>}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path='profile' element={<Profile />} />
-        <Route path='profile/:id' element={<Profile />} />
-        <Route path='favorites' element={<Favorites />} />
-        <Route path='favorites/:id' element={<Favorites />} />
-        <Route path='note' element={<Note/>} />
-        <Route path='note/:id' element={<Note/>} />
-        <Route path='reg' element={<SignUp />} />
-        <Route path='login' element={<SignIn />} />
-        <Route path='*' element={<NotFound />} />
+
+        <Route
+          path="profile/:id"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="favorites/:id"
+          element={
+            <RequireAuth>
+              <Favorites />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="note/:id"
+          element={
+            <RequireAuth>
+              <Note />
+            </RequireAuth>
+          }
+        />
+
+        <Route path="reg" element={<SignUp />} />
+        <Route path="login" element={<SignIn />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
-  )
-}
+  );
+};
 
-export default App
+export default App;

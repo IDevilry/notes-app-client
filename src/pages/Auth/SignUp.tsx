@@ -2,8 +2,22 @@ import React, { useState } from "react";
 import { formData } from "../../types";
 import { validateFormData } from "../../utils";
 import { Button, Form, Input } from "../../components/shared";
+import { useMutation } from "@apollo/client";
+import { SIGN_UP } from "../../apollo";
+import { useNavigate } from "react-router-dom";
+
 
 const SignUp: React.FC = () => {
+
+  const navigate = useNavigate()
+
+  const [signUp, { error }] = useMutation(SIGN_UP, {
+    onCompleted: (data) => {
+      localStorage.setItem("token", `Bearer ${data.signUp}`);
+      navigate('/')
+    },
+  });
+
   const [formData, setFormData] = useState<formData>({
     username: "",
     email: "",
@@ -24,7 +38,13 @@ const SignUp: React.FC = () => {
     e.preventDefault();
     const isValid = validateFormData(formData);
     if (isValid === true) {
-      console.log(formData);
+      signUp({
+        variables: {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        },
+      });
     } else {
       setValidateError(isValid || "");
     }
@@ -61,6 +81,7 @@ const SignUp: React.FC = () => {
         <Button type="submit">Зарегистрироваться</Button>
       </Form>
       {validateError && <p>Невалидные данные</p>}
+      {error && <p>Такой пользователь существует</p>}
     </div>
   );
 };

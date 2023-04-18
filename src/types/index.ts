@@ -1,18 +1,32 @@
 export interface formData {
-  username: string;
+  username?: string;
   email: string;
   password: string;
 }
 
+export interface User {
+  id?: string;
+  username?: string;
+  favoritesNotes?: Note[];
+  notes?: Note[];
+  createdAt?: string;
+}
+
+export interface Users {
+  users: User[];
+}
+
 export interface Note {
-  notes: [
-    {
-      id?: string;
-      title?: string;
-      content?: string;
-      createdAt?: string;
-      updatedAt?: string;
-      author?: string;
-    }
-  ];
+  id?: string;
+  title?: string;
+  content?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  favoritedBy?: User;
+  author?: User;
+  addedToFavoriteTimes?: number;
+}
+
+export interface Notes {
+  notes: Note[];
 }
