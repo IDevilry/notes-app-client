@@ -11,26 +11,42 @@ export const ALL_USERS = gql`
   }
 `;
 
-export const USER = gql`
-  query User {
-    user {
-      id
-      username
-      email
-      notes
-      createdAt
-    }
-  }
-`;
-
 export const USER_BY_ID = gql`
-  query UserById($userByIdId: ID!) {
-    userById(id: $userByIdId) {
+  query UserById($id: ID!) {
+    userById(id: $id) {
       id
       username
       email
       createdAt
       updatedAt
+      favoritesNotes {
+        addedToFavoriteTimes
+        content
+        createdAt
+        id
+        title
+      }
+      notes {
+        addedToFavoriteTimes
+        content
+        createdAt
+        id
+        title
+      }
+    }
+  }
+`;
+
+export const USER_FAVORITE_NOTES = gql`
+  query UserById($id: ID!) {
+    userById(id: $id) {
+      favoritesNotes {
+        addedToFavoriteTimes
+        content
+        createdAt
+        id
+        title
+      }
     }
   }
 `;

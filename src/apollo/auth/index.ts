@@ -11,3 +11,11 @@ export const SIGN_IN = gql`
     signIn(password: $password, email: $email)
   }
 `;
+
+export const IS_AUTH = gql`
+query User {
+  user {
+    id
+  }
+}
+`;

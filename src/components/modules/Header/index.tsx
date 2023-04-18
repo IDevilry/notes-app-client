@@ -1,55 +1,42 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "../../shared";
 
-const Header: React.FC = () => {
+type HeaderProps = {
+  id: string | undefined;
+};
+
+const Header = ({ id }: HeaderProps) => {
   return (
     <header className="mx-auto">
       <nav className="flex items-center justify-center h-20">
         <ul className="flex gap-6">
           <li className="font-medium text-[20px]">
-            <NavLink
-              className={({ isActive }) => (isActive ? "text-red-400" : "")}
-              to={"/"}
-            >
-              Home
-            </NavLink>
+            <NavLink to={"/"}>Home</NavLink>
           </li>
-          <li className="font-medium text-[20px]">
-            <NavLink
-              className={({ isActive }) => (isActive ? "text-red-400" : "")}
-              to={"/profile"}
-            >
-              Profile
-            </NavLink>
-          </li>
-          <li className="font-medium text-[20px]">
-            <NavLink
-              className={({ isActive }) => (isActive ? "text-red-400" : "")}
-              to={"/favorites"}
-            >
-              Favorites
-            </NavLink>
-          </li>
-          <li className="font-medium text-[20px]">
-            <NavLink
-              className={({ isActive }) => (isActive ? "text-red-400" : "")}
-              to={"/reg"}
-            >
-              Sign Up
-            </NavLink>
-          </li>
-          <li className="font-medium text-[20px]">
-            <NavLink
-              className={({ isActive }) => (isActive ? "text-red-400" : "")}
-              to={"/login"}
-            >
-              Login
-            </NavLink>
-          </li>
+          {id && (
+            <>
+              <li className="font-medium text-[20px]">
+                <NavLink to={`/profile/${id}`}>Profile</NavLink>
+              </li>{" "}
+              <li className="font-medium text-[20px]">
+                <NavLink to={`/favorites/${id}`}>Favorites</NavLink>
+              </li>
+            </>
+          )}
+
+          {id ? null : (
+            <>
+              <li className="font-medium text-[20px]">
+                <NavLink to={"/reg"}>Sign Up</NavLink>
+              </li>
+              <li className="font-medium text-[20px]">
+                <NavLink to={"/login"}>Login</NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>
   );
 };
 
-export default Header ;
+export default Header;

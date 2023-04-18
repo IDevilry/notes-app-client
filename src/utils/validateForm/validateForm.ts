@@ -1,6 +1,6 @@
 import { formData } from "../../types";
 
-export function validateUsername(value: string): boolean {
+export function validateUsername(value: string | undefined): boolean {
   if (value && value.length > 5) {
     return value.includes("!@#$%^&*()_+=-№;%:?//|") ? false : true;
   }
