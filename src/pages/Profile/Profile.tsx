@@ -1,15 +1,15 @@
 import React from "react";
 
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
 
 import { USER_BY_ID } from "../../apollo/users";
 import { User } from "../../types";
-import { NoteList } from "../../components/modules";
+import { UserCard } from "../../components/modules";
+import { Link, Outlet, useParams } from "react-router-dom";
 
 const Profile: React.FC = () => {
   const { id } = useParams();
-  const { data, loading, error } = useQuery<{ userById: User }>(USER_BY_ID, {
+  const { data, loading, error } = useQuery<{ user: User }>(USER_BY_ID, {
     variables: {
       id: id,
     },
@@ -18,6 +18,9 @@ const Profile: React.FC = () => {
     <div>
       {loading && <p>Загрузка...</p>}
       {error && <p>Произошла ошибка</p>}
+      <UserCard user={data?.user} />
+      <Link to="edit">Edit</Link>
+      <Outlet />
     </div>
   );
 };

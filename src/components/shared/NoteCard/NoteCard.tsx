@@ -1,15 +1,19 @@
-import { Note } from "../../../types";
-
 import Like from "../../../assets/like.svg";
+
+import { Note, Notes } from "../../../types";
+import { useQuery } from "@apollo/client";
+
+import { USER_FAVORITE_NOTES } from "../../../apollo";
 
 type NoteCardProps = {
   note?: Note;
-  userFavoriteNotes?: Note[];
 };
 
-const NoteCard = ({ note = {}, userFavoriteNotes }: NoteCardProps) => {
+const NoteCard: React.FC<NoteCardProps> = ({
+  note = {},
+}) => {
   const { addedToFavoriteTimes, author, content, createdAt, id, title } = note;
-
+  const { data: userFavoriteNotes } = useQuery<{ user: Notes }>(USER_FAVORITE_NOTES);
   const date = new Date(createdAt || "").toLocaleString();
 
   return (
@@ -30,7 +34,7 @@ const NoteCard = ({ note = {}, userFavoriteNotes }: NoteCardProps) => {
         {
           <Like
             fill={
-              userFavoriteNotes?.find((note) => note.id === id)
+              userFavoriteNotes?.user.notes?.find((note) => note.id === id)
                 ? "red"
                 : "white"
             }

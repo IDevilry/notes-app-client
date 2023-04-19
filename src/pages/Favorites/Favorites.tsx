@@ -1,30 +1,24 @@
 import React from "react";
 
-import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
-
-import { Note } from "../../types";
 import { NoteCard } from "../../components/shared";
+import { Note } from "../../types";
+import { ApolloError } from "@apollo/client";
 
-import { USER_FAVORITE_NOTES } from "../../apollo/";
-
-type FavoritesNotes = {
-  userById: {
-    favoritesNotes: Note[];
-  };
+type FavoritesProps = {
+  notes?: Note[];
+  loading?: boolean;
+  error?: ApolloError;
 };
 
-const Favorites: React.FC = () => {
-  const { id } = useParams();
-  const { data } = useQuery<FavoritesNotes>(USER_FAVORITE_NOTES, {
-    variables: {
-      id: id,
-    },
-  });
+const Favorites: React.FC<FavoritesProps> = ({ notes, loading, error }) => {
   return (
     <div>
-      {data?.userById.favoritesNotes.length === 0 && <p>Вы не добавили ни одной заметки в избранное</p>}
-      {data?.userById?.favoritesNotes?.map((note) => (
+      {loading && <p>Загрузка...</p>}
+      {error && <p>Ошибка</p>}
+      {notes?.length === 0 && (
+        <p>Вы не добавили ни одной заметки в избранное</p>
+      )}
+      {notes?.map((note) => (
         <NoteCard key={note.id} note={note} />
       ))}
     </div>

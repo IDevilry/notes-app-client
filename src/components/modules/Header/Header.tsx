@@ -18,7 +18,7 @@ const Header = ({ id }: HeaderProps) => {
                 <NavLink to={`/profile/${id}`}>Profile</NavLink>
               </li>{" "}
               <li className="font-medium text-[20px]">
-                <NavLink to={`/favorites/${id}`}>Favorites</NavLink>
+                <NavLink to={`/favorites`}>Favorites</NavLink>
               </li>
             </>
           )}

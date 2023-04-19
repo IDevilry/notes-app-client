@@ -1,17 +1,21 @@
 import React from "react";
 
-import { useQuery } from "@apollo/client";
-import { NOTES } from "../../apollo";
-import { Notes } from "../../types";
 import { NoteList } from "../../components/modules";
+import { Note } from "../../types";
+import { ApolloError } from "@apollo/client";
 
-const Home: React.FC = () => {
-  const { data, loading, error } = useQuery<Notes>(NOTES);
+type HomeProps = {
+  notes?: Note[];
+  isLoading?: boolean;
+  error?: ApolloError;
+};
 
+const Home: React.FC<HomeProps> = ({ notes, isLoading, error }) => {
   return (
     <>
-      {loading && <p>Загрузка...</p>}
-      <NoteList note={data} />
+      {isLoading && <p>Загрузка...</p>}
+      {error && <p>Произошла ошибка</p>}
+      <NoteList note={notes} />
     </>
   );
 };
