@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, Form, Input } from "../../components/shared";
 import { useLocation, useNavigate } from "react-router-dom";
 import { formData } from "../../types";
-import { useMutation, useApolloClient } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../../apollo";
 
 const SignIn: React.FC = () => {
@@ -11,8 +11,6 @@ const SignIn: React.FC = () => {
   const navigate = useNavigate();
 
   const fromPage = location.state?.from || "/";
-
-  const client = useApolloClient()
 
   const [signIn, { error }] = useMutation(SIGN_IN, {
     onCompleted: (data) => {
@@ -43,8 +41,12 @@ const SignIn: React.FC = () => {
     });
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    e.key === "Enter" ? handleSubmit : null;
+  };
+
   return (
-    <Form handleSubmit={handleSubmit}>
+    <Form handleSubmit={handleSubmit} handleKeyPress={handleKeyPress}>
       <Input
         type="email"
         htmlForName="email"

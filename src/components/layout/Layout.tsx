@@ -5,7 +5,7 @@ import { useAuth } from "../../hooks";
 const Layout: React.FC = () => {
   const { id } = useAuth();
   return (
-    <div className="max-w-[1170px] mx-auto">
+    <div className="max-w-[1170px]">
       <div className="mx-[30px]">
         <Header id={id} />
         <main>

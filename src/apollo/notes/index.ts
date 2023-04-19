@@ -1,21 +1,21 @@
 import { gql } from "@apollo/client";
 
-export const GET_NOTES = gql`
+export const NOTES = gql`
   query Notes {
     notes {
       id
       title
       content
-      createdAt
-      updatedAt
       author {
         username
       }
+      addedToFavoriteTimes
+      createdAt
     }
   }
 `;
 
-export const GET_NOTE_BY_ID = gql`
+export const NOTE_BY_ID = gql`
   query Note($noteId: ID) {
     note(id: $noteId) {
       id
@@ -23,7 +23,6 @@ export const GET_NOTE_BY_ID = gql`
       content
       addedToFavoriteTimes
       createdAt
-      updatedAt
     }
   }
 `;

@@ -8,7 +8,7 @@ import {
   SignIn,
   SignUp,
 } from "./pages";
-import { Layout } from "./components/layout";
+import { Layout } from "./components/layout/Layout";
 import { RequireAuth } from "./providers/requireAuth";
 
 const App: React.FC = () => {

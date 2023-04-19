@@ -1,8 +1,8 @@
 import React from "react";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
-  type: "button" | "submit" | "reset";
+  type: "submit" | "reset" | "button" | undefined;
   disabled?: boolean;
   handleClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({
   children,
   disabled,
   handleClick,
-}: ButtonProps) => {
+}) => {
   return (
     <button
       onClick={handleClick}

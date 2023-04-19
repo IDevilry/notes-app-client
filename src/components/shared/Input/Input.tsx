@@ -1,7 +1,7 @@
 import React from "react";
 
 type CommonInputProps = {
-  type: "text" | "password" | "email";
+  type: React.HTMLInputTypeAttribute;
   placeholder?: string;
   required?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;

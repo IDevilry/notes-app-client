@@ -1,15 +1,16 @@
 import { SIGN_IN, SIGN_UP } from "./auth";
-import { DELETE_NOTE, GET_NOTES, NEW_NOTE, UPDATE_NOTE } from "./notes";
-import { ALL_USERS, USER_BY_ID, USER_FAVORITE_NOTES } from "./users";
+import { DELETE_NOTE, NOTES, NEW_NOTE, UPDATE_NOTE, NOTE_BY_ID } from "./notes";
+import { USERS, USER_BY_ID, USER_FAVORITE_NOTES } from "./users";
 
 export {
   SIGN_IN,
   SIGN_UP,
   DELETE_NOTE,
-  GET_NOTES,
+  NOTES,
   NEW_NOTE,
   UPDATE_NOTE,
-  ALL_USERS,
+  USERS,
   USER_BY_ID,
   USER_FAVORITE_NOTES,
+  NOTE_BY_ID,
 };

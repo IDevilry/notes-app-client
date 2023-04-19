@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 import { USER_BY_ID } from "../../apollo/users";
 import { User } from "../../types";
-import { NoteCard } from "../../components/shared";
+import { NoteList } from "../../components/modules";
 
 const Profile: React.FC = () => {
   const { id } = useParams();
@@ -18,14 +18,6 @@ const Profile: React.FC = () => {
     <div>
       {loading && <p>Загрузка...</p>}
       {error && <p>Произошла ошибка</p>}
-      {data?.userById?.username}
-      {data?.userById?.createdAt}
-      {data?.userById.notes?.map((note) => (
-        <NoteCard key={data.userById.id} note={note} />
-      ))}
-      {data?.userById.notes?.map((note) => (
-        <NoteCard key={data.userById.id} note={note} />
-      ))}
     </div>
   );
 };

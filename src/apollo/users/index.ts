@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const ALL_USERS = gql`
+export const USERS = gql`
   query Users {
     users {
       id
@@ -41,11 +41,14 @@ export const USER_FAVORITE_NOTES = gql`
   query UserById($id: ID!) {
     userById(id: $id) {
       favoritesNotes {
-        addedToFavoriteTimes
-        content
-        createdAt
         id
         title
+        content
+        author {
+          username
+        }
+        addedToFavoriteTimes
+        createdAt
       }
     }
   }

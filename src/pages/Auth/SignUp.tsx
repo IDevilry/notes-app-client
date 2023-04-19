@@ -49,10 +49,13 @@ const SignUp: React.FC = () => {
       setValidateError(isValid || "");
     }
   };
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    e.key === 'Enter' ? handleSubmit : null
+  }
 
   return (
     <div className="">
-      <Form handleSubmit={handleSubmit}>
+      <Form handleSubmit={handleSubmit} handleKeyPress={handleKeyPress}>
         <Input
           type="text"
           required={true}
