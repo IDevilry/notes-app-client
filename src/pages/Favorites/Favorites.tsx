@@ -1,8 +1,8 @@
 import React from "react";
 
-import { NoteCard } from "../../components/shared";
 import { Note } from "../../types";
 import { ApolloError } from "@apollo/client";
+import { NoteList } from "../../components/modules";
 
 type FavoritesProps = {
   notes?: Note[];
@@ -18,9 +18,7 @@ const Favorites: React.FC<FavoritesProps> = ({ notes, loading, error }) => {
       {notes?.length === 0 && (
         <p>Вы не добавили ни одной заметки в избранное</p>
       )}
-      {notes?.map((note) => (
-        <NoteCard key={note.id} note={note} />
-      ))}
+      <NoteList note={notes} />
     </div>
   );
 };

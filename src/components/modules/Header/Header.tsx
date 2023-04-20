@@ -6,32 +6,32 @@ type HeaderProps = {
 
 const Header = ({ id }: HeaderProps) => {
   return (
-    <header className="mx-auto">
-      <nav className="flex items-center justify-center h-20">
-        <ul className="flex gap-6">
-          <li className="font-medium text-[20px]">
-            <NavLink to={"/"}>Home</NavLink>
+    <header className="mx-auto bg-[#535354]">
+      <nav className="flex items-center justify-center h-20 max-w-[1170px] mx-auto">
+        <ul className="flex w-full justify-between font-medium text-[20px]">
+          <li>
+            <NavLink to={"/"}>Домашнаяя страница</NavLink>
           </li>
           {id && (
             <>
-              <li className="font-medium text-[20px]">
-                <NavLink to={`/profile/${id}`}>Profile</NavLink>
+              <li>
+                <NavLink to={`/profile/${id}`}>Профиль</NavLink>
               </li>{" "}
-              <li className="font-medium text-[20px]">
-                <NavLink to={`/favorites`}>Favorites</NavLink>
+              <li>
+                <NavLink to={`/favorites`}>Избранное</NavLink>
               </li>
             </>
           )}
 
           {id ? null : (
-            <>
-              <li className="font-medium text-[20px]">
-                <NavLink to={"/reg"}>Sign Up</NavLink>
+            <ul className="flex gap-3">
+              <li>
+                <NavLink to={"/reg"}>Регистрация</NavLink>
               </li>
-              <li className="font-medium text-[20px]">
-                <NavLink to={"/login"}>Login</NavLink>
+              <li>
+                <NavLink to={"/login"}>Вход</NavLink>
               </li>
-            </>
+            </ul>
           )}
         </ul>
       </nav>

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
   type: "submit" | "reset" | "button" | undefined;
+  variant?: "primary" | "secondary";
+  children: string | ReactNode;
   disabled?: boolean;
-  handleClick?: React.MouseEventHandler<HTMLButtonElement>;
+  handleClick?: any;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -12,13 +13,16 @@ const Button: React.FC<ButtonProps> = ({
   children,
   disabled,
   handleClick,
+  variant = "primary",
 }) => {
   return (
     <button
       onClick={handleClick}
       type={type}
       disabled={disabled}
-      className="flex items-center p-4 bg-sky-600 rounded-xl text-white text-[16px]"
+      className={`flex items-center rounded-xl text-white text-[16px] ${
+        variant === "primary" ? "bg-sky-600 py-2 px-4" : "my-2 mx-4"
+      }`}
     >
       {children}
     </button>

@@ -28,11 +28,12 @@ export const NOTE_BY_ID = gql`
 `;
 
 export const NEW_NOTE = gql`
-  mutation NewNote($content: String!, $title: String!) {
-    newNote(content: $content, title: $title) {
+  mutation NewNote($content: String!, $title: String!, $category: String!) {
+    newNote(content: $content, title: $title, category: $category) {
       id
       title
       content
+      category
       createdAt
     }
   }
@@ -51,9 +52,18 @@ export const UPDATE_NOTE = gql`
 `;
 
 export const DELETE_NOTE = gql`
-  mutation DeleteNote($deleteNoteId: ID!) {
-    deleteNote(id: $deleteNoteId) {
+  mutation DeleteNote($id: ID!) {
+    deleteNote(id: $id) {
       id
+    }
+  }
+`;
+
+export const TOGGLE_FAVORITE = gql`
+  mutation ToggleFavoriteNote($id: ID!) {
+    toggleFavoriteNote(id: $id) {
+      id
+      addedToFavoriteTimes
     }
   }
 `;

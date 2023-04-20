@@ -9,7 +9,7 @@ type User = {
 export const useAuth = (): User => {
   const { data, error } = useQuery<{ user: User }>(IS_AUTH);
   return {
-    id: data?.user.id,
+    id: data?.user?.id,
     error: error,
   };
 };

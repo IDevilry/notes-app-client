@@ -25,8 +25,21 @@ export interface Note {
   favoritedBy?: User;
   author?: User;
   addedToFavoriteTimes?: number;
+  category?: Category;
 }
 
 export interface Notes {
   notes?: Note[];
 }
+
+export type Category =
+  | "Web Technologies"
+  | "Web API"
+  | "HTML"
+  | "CSS"
+  | "JS"
+  | "TS"
+  | "React"
+  | "Redux"
+  | "Testing"
+  | "Node JS";

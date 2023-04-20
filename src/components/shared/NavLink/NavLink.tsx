@@ -9,10 +9,18 @@ type NavLinkProps = {
 const NavLink = ({ children, to, ...props }: NavLinkProps) => {
   const match = useMatch({
     path: to,
-    end: to.length === 1
+    end: to.length === 1,
   });
   return (
-    <Link className={match ? "text-sky-600" : ""} to={to} {...props}>
+    <Link
+      className={
+        match
+          ? "text-sky-500 transition-all"
+          : "text-white transition-all hover:opacity-80"
+      }
+      to={to}
+      {...props}
+    >
       {children}
     </Link>
   );

@@ -6,6 +6,7 @@ import NotFound from "./NotFound/NotFound";
 import SingleNote from "./SingleNote/SingleNote";
 import SignUp from "./Auth/SignUp";
 import SignIn from "./Auth/SignIn";
+import NewNote from "./NewNote/NewNote";
 
 export {
   Favorites,
@@ -16,4 +17,5 @@ export {
   SignUp,
   SignIn,
   EditProfile,
+  NewNote,
 };

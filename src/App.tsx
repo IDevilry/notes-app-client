@@ -8,6 +8,7 @@ import {
   SignIn,
   SignUp,
   EditProfile,
+  NewNote,
 } from "./pages";
 import { Layout } from "./components/layout/Layout";
 import { RequireAuth } from "./providers/requireAuth";
@@ -31,7 +32,7 @@ const App: React.FC = () => {
             <Home notes={notes?.notes} isLoading={loading} error={error} />
           }
         />
-
+        <Route path="new" element={<NewNote />} />
         <Route
           path="profile/:id/*"
           element={
@@ -48,7 +49,7 @@ const App: React.FC = () => {
           element={
             <RequireAuth>
               <Favorites
-                notes={favorNotes?.user.notes}
+                notes={favorNotes?.user?.notes}
                 loading={favorLoading}
                 error={favorError}
               />
