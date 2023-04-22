@@ -57,10 +57,10 @@ const NewNote: React.FC = () => {
   };
   return (
     <Form handleSubmit={handleSubmit}>
-      <Input onChange={handleChange} htmlForName="title" type="text">
+      <Input onChange={handleChange} htmlFor="title" type="text">
         Title
       </Input>
-      <Input onChange={handleChange} htmlForName="content" type="text">
+      <Input onChange={handleChange} htmlFor="content" type="text">
         Content
       </Input>
       <select name="category" onChange={handleChange}>

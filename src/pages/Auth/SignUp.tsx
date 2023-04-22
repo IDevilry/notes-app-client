@@ -34,6 +34,7 @@ const SignUp: React.FC = () => {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    console.log(formFields);
     const isValid = validateFormData(formFields);
     if (isValid === true) {
       signUp({
@@ -55,7 +56,7 @@ const SignUp: React.FC = () => {
         <Input
           type="text"
           required={true}
-          htmlForName="username"
+          htmlFor="username"
           onChange={(e) => handleChange(e)}
         >
           Имя пользователя:
@@ -63,7 +64,7 @@ const SignUp: React.FC = () => {
         <Input
           type="email"
           required={true}
-          htmlForName="email"
+          htmlFor="email"
           onChange={(e) => handleChange(e)}
         >
           Электронная почта:
@@ -72,7 +73,7 @@ const SignUp: React.FC = () => {
         <Input
           type="password"
           required={true}
-          htmlForName="password"
+          htmlFor="password"
           onChange={(e) => handleChange(e)}
         >
           Пароль:

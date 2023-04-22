@@ -1,19 +1,18 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 
-type CommonInputProps = {
-  type: React.HTMLInputTypeAttribute;
-  placeholder?: string;
-  required?: boolean;
+interface CommonInputProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+  htmlFor?: string;
+  otherProps?: InputHTMLAttributes<HTMLInputElement>;
+}
 
 type PropsWithLabel = CommonInputProps & {
-  htmlForName?: string;
+  htmlFor?: string;
   children?: string;
 };
 
 type PropsWithoutLabel = CommonInputProps & {
-  htmlForName?: never;
+  htmlFor?: never;
   children?: never;
 };
 
@@ -21,38 +20,29 @@ type InputProps = PropsWithoutLabel | PropsWithLabel;
 
 const Input: React.FC<InputProps> = ({
   children,
-  htmlForName,
-  placeholder,
-  type,
   onChange,
-  required,
+  htmlFor,
+  ...otherProps
 }) => {
   return (
     <>
       {children ? (
         <>
           <label
-            htmlFor={htmlForName}
             className="text-[16px] font-medium underline"
+            htmlFor={htmlFor}
           >
             {children}
           </label>
           <input
+          name={htmlFor}
             className="max-w-[240px] bg-amber-300 p-3 rounded-xl placeholder:text-sky-500"
-            name={htmlForName}
-            type={type}
-            placeholder={placeholder}
             onChange={onChange}
-            required={required}
+            {...otherProps}
           />
         </>
       ) : (
-        <input
-          type={type}
-          placeholder={placeholder}
-          onChange={onChange}
-          required={required}
-        />
+        <input onChange={onChange} {...otherProps} />
       )}
     </>
   );

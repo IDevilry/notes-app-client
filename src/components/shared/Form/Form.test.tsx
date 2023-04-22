@@ -13,7 +13,7 @@ describe("Form works correctly", () => {
           onChange={onChangeFn}
           placeholder="user"
           type="text"
-          htmlForName="user"
+          htmlFor="user"
         >
           Username
         </Input>
@@ -21,7 +21,7 @@ describe("Form works correctly", () => {
           onChange={onChangeFn}
           placeholder="pass"
           type="text"
-          htmlForName="pass"
+          htmlFor="pass"
         >
           Password
         </Input>

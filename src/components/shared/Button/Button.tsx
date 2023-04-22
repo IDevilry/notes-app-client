@@ -1,28 +1,25 @@
-import React, { ReactNode } from "react";
+import React, { ButtonHTMLAttributes, ReactNode } from "react";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  type: "submit" | "reset" | "button" | undefined;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
   children: string | ReactNode;
-  disabled?: boolean;
   handleClick?: any;
+  otherProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 const Button: React.FC<ButtonProps> = ({
-  type,
   children,
-  disabled,
   handleClick,
   variant = "primary",
+  ...otherProps
 }) => {
   return (
     <button
       onClick={handleClick}
-      type={type}
-      disabled={disabled}
       className={`flex items-center rounded-xl text-white text-[16px] ${
         variant === "primary" ? "bg-sky-600 py-2 px-4" : "my-2 mx-4"
       }`}
+      {...otherProps}
     >
       {children}
     </button>

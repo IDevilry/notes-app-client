@@ -5,11 +5,10 @@ describe("Input props", () => {
   it("input with label", () => {
     render(
       <Input
-        type="text"
-        required
-        placeholder="username"
-        htmlForName="user"
-        onChange={() => {}}
+      type="text"
+      required
+      placeholder="username"
+      htmlFor="user"
       >
         Username
       </Input>
@@ -22,7 +21,7 @@ describe("Input props", () => {
         type="text"
         required
         placeholder="username"
-        htmlForName="user"
+        htmlFor="user"
         onChange={() => {}}
       />
     );

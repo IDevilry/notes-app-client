@@ -9,7 +9,7 @@ import { Link, Outlet, useParams } from "react-router-dom";
 
 const Profile: React.FC = () => {
   const { id } = useParams();
-  const { data, loading, error } = useQuery<{ user: User }>(USER_BY_ID, {
+  const { data, loading, error } = useQuery<{ profile: User }>(USER_BY_ID, {
     variables: {
       id: id,
     },
@@ -18,7 +18,7 @@ const Profile: React.FC = () => {
     <div>
       {loading && <p>Загрузка...</p>}
       {error && <p>Произошла ошибка</p>}
-      <UserCard user={data?.user} />
+      <UserCard user={data?.profile} />
       <Link to="edit">Edit</Link>
       <Outlet />
     </div>

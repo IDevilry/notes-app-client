@@ -13,26 +13,12 @@ export const USERS = gql`
 
 export const USER_BY_ID = gql`
   query UserById($id: ID!) {
-    user: userById(id: $id) {
+    profile: userById(id: $id) {
       id
       username
       email
       createdAt
       updatedAt
-      favoritesNotes {
-        addedToFavoriteTimes
-        content
-        createdAt
-        id
-        title
-      }
-      notes {
-        addedToFavoriteTimes
-        content
-        createdAt
-        id
-        title
-      }
     }
   }
 `;
