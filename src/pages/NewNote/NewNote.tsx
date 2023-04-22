@@ -48,7 +48,9 @@ const NewNote: React.FC = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     setNewNote({
       ...newNoteData,
@@ -60,12 +62,20 @@ const NewNote: React.FC = () => {
       <Input onChange={handleChange} htmlFor="title" type="text">
         Title
       </Input>
-      <Input onChange={handleChange} htmlFor="content" type="text">
-        Content
-      </Input>
+      <label htmlFor="content">
+        <textarea
+          value={newNoteData.content}
+          name="content"
+          onChange={handleChange}
+        >
+          Content
+        </textarea>
+      </label>
       <select name="category" onChange={handleChange}>
         {categories.map((category) => (
-          <option value={category}>{category}</option>
+          <option key={category} value={category}>
+            {category}
+          </option>
         ))}
       </select>
       <Button type="submit">Submit</Button>
