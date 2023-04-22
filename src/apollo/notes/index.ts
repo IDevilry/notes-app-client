@@ -6,6 +6,7 @@ export const NOTES = gql`
       id
       title
       content
+      category
       author {
         username
       }
@@ -21,6 +22,7 @@ export const NOTE_BY_ID = gql`
       id
       title
       content
+      category
       addedToFavoriteTimes
       createdAt
     }

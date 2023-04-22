@@ -1,24 +1,35 @@
 import Like from "../../../assets/like.svg";
 import Button from "../Button/Button";
+import DeleteNoteButton from "../DeleteNoteButton/DeleteNote";
 
-import { Note, Notes } from "../../../types";
-import { Link } from "react-router-dom";
-import { useMutation, useQuery } from "@apollo/client";
-import { DELETE_NOTE, NOTES, USER_FAVORITE_NOTES } from "../../../apollo";
+import { Note } from "../../../types";
+import { NavLink } from "react-router-dom";
+import { useMemo } from "react";
 
 type NoteCardProps = {
   note?: Note;
-  toggleFavorite: ({}) => void;
+  userNotes: Note[];
+  toggleFavorite: ({ variables }: { variables: { id: string } }) => void;
 };
 
-const NoteCard: React.FC<NoteCardProps> = ({ note = {}, toggleFavorite }) => {
-  const { data: userFavoriteNotes } = useQuery<{ user: Notes }>(
-    USER_FAVORITE_NOTES
+const NoteCard: React.FC<NoteCardProps> = ({
+  note = {},
+  userNotes = [],
+  toggleFavorite,
+}) => {
+  const {
+    addedToFavoriteTimes,
+    author,
+    content,
+    createdAt,
+    id,
+    title,
+    category,
+  } = note;
+  const filteredNotes = useMemo(
+    () => userNotes?.find((note) => note.id === id),
+    [id, userNotes]
   );
-  const [deleteNote] = useMutation(DELETE_NOTE, {
-    refetchQueries: [{ query: NOTES }],
-  });
-  const { addedToFavoriteTimes, author, content, createdAt, id, title } = note;
 
   const date = new Date(createdAt || "").toLocaleString();
   return (
@@ -26,23 +37,13 @@ const NoteCard: React.FC<NoteCardProps> = ({ note = {}, toggleFavorite }) => {
       <div className="p-6 rounded-t-[10px] bg-[#515662]">
         <div className="border-b-[1px] border-gray-500 flex justify-between">
           <p className="font-semibold text-[20px]">{author?.username}</p>
-          <Button
-            type="button"
-            handleClick={() =>
-              deleteNote({
-                variables: {
-                  id: id,
-                },
-              })
-            }
-            variant="secondary"
-          >
-            X
-          </Button>
+          <DeleteNoteButton id={id || ""} />
         </div>
         <div className="p-2">
           <div className="flex justify-between items-center">
-            <h2 className="text-[18px] font-semibold">{title}</h2>
+            <h2 className="text-[18px] font-semibold">
+              {title}, {category}
+            </h2>
             <p className="font-medium text-[15px]">{date}</p>
           </div>
           <p className="pt-1 text-[16px] font-medium">{content}</p>
@@ -55,31 +56,25 @@ const NoteCard: React.FC<NoteCardProps> = ({ note = {}, toggleFavorite }) => {
               handleClick={() =>
                 toggleFavorite({
                   variables: {
-                    id: id,
+                    id: id || "",
                   },
                 })
               }
               type="button"
               variant="secondary"
             >
-              <Like
-                fill={
-                  userFavoriteNotes?.user.notes?.find((note) => note.id === id)
-                    ? "red"
-                    : "white"
-                }
-              />
+              <Like fill={filteredNotes ? "red" : "white"} />
             </Button>
           }
           <p>{addedToFavoriteTimes ? addedToFavoriteTimes : null}</p>
         </div>
         <div className="">
-          <Link
+          <NavLink
             className="flex items-center py-2 px-4 bg-sky-600 rounded-xl text-white text-[16px]"
             to={`/note/${id}`}
           >
             Подробнее
-          </Link>
+          </NavLink>
         </div>
       </div>
     </div>

@@ -1,50 +1,57 @@
 import React, { useState } from "react";
+
 import { Button, Form, Input } from "../../components/shared";
 import { useMutation } from "@apollo/client";
-import { NEW_NOTE, NOTES, USER_FAVORITE_NOTES } from "../../apollo";
-import { Category } from "../../types";
+import { NEW_NOTE, NOTES } from "../../apollo";
 
-type FormData = {
+type newNote = {
   title: string;
   content: string;
   category: string;
 };
 
+const categories = [
+  "Web Technologies",
+  "Web API",
+  "HTML",
+  "CSS",
+  "JS",
+  "TS",
+  "React",
+  "Redux",
+  "Testing",
+  "Node JS",
+];
+
 const NewNote: React.FC = () => {
+  const [newNoteData, setNewNote] = useState<newNote>({
+    title: "",
+    content: "",
+    category: categories[0],
+  });
+
+  const getNotes = () => ({
+    query: NOTES,
+  });
+
   const [submitNewNote] = useMutation(NEW_NOTE, {
-    refetchQueries: [
-      {
-        query: NOTES,
-      },
-      {
-        query: USER_FAVORITE_NOTES,
-      },
-    ],
+    refetchQueries: [getNotes()],
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
     submitNewNote({
       variables: {
-        ...formData,
+        ...newNoteData,
       },
     });
   };
-  const [formData, setFormData] = useState<FormData>({
-    title: "",
-    content: "",
-    category: "",
-  });
-  const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      category: e.target.value,
-    });
-  };
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setNewNote({
+      ...newNoteData,
       [e.target.name]: e.target.value,
     });
   };
@@ -56,9 +63,10 @@ const NewNote: React.FC = () => {
       <Input onChange={handleChange} htmlForName="content" type="text">
         Content
       </Input>
-      <select onChange={handleChangeSelect}>
-        <option value="JS">JS</option>
-        <option value="React">React</option>
+      <select name="category" onChange={handleChange}>
+        {categories.map((category) => (
+          <option value={category}>{category}</option>
+        ))}
       </select>
       <Button type="submit">Submit</Button>
     </Form>

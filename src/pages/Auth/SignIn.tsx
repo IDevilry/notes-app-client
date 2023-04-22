@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Button, Form, Input } from "../../components/shared";
 import { useLocation, useNavigate } from "react-router-dom";
-import { formData } from "../../types";
+import { UsernameFormFields } from "../../types";
 import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../../apollo";
 
@@ -19,14 +19,14 @@ const SignIn: React.FC = () => {
     },
   });
 
-  const [formData, setFormData] = useState<formData>({
+  const [formFields, setFormFields] = useState<UsernameFormFields>({
     email: "",
     password: "",
   });
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setFormData({
-      ...formData,
+    setFormFields({
+      ...formFields,
       [e.target.name]: e.target.value,
     });
   };
@@ -35,8 +35,8 @@ const SignIn: React.FC = () => {
     e.preventDefault();
     signIn({
       variables: {
-        email: formData.email,
-        password: formData.password,
+        email: formFields.email,
+        password: formFields.password,
       },
     });
   };

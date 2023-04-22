@@ -1,27 +1,38 @@
 import { NoteCard } from "../../shared";
-import { Note } from "../../../types";
+import { Note, Notes } from "../../../types";
 import { NOTES, TOGGLE_FAVORITE, USER_FAVORITE_NOTES } from "../../../apollo";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 type NoteListProps = {
-  note?: Note[];
+  notes: Note[];
 };
 
-const NoteList: React.FC<NoteListProps> = ({ note = [] }) => {
-  const [toggleFavorite] = useMutation(TOGGLE_FAVORITE, {
-    refetchQueries: [
-      {
-        query: NOTES,
-      },
-      {
-        query: USER_FAVORITE_NOTES,
-      },
-    ],
+const NoteList: React.FC<NoteListProps> = ({ notes = [] }) => {
+  const getNotes = () => ({
+    query: NOTES,
   });
+
+  const getUserFavoriteNotes = () => ({
+    query: USER_FAVORITE_NOTES,
+  });
+
+  const [toggleFavorite] = useMutation(TOGGLE_FAVORITE, {
+    refetchQueries: [getNotes(), getUserFavoriteNotes()],
+  });
+
+  const { data: userFavoriteNotes } = useQuery<{ user: Notes }>(
+    USER_FAVORITE_NOTES
+  );
+
   return (
     <ul className="flex flex-col md:flex-row flex-wrap">
-      {note?.map((note) => (
-        <NoteCard toggleFavorite={toggleFavorite} key={note.id} note={note} />
+      {notes?.map((note) => (
+        <NoteCard
+          toggleFavorite={toggleFavorite}
+          key={note?.id}
+          note={note}
+          userNotes={userFavoriteNotes?.user.notes || []}
+        />
       ))}
     </ul>
   );

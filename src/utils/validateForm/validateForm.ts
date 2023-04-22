@@ -1,4 +1,4 @@
-import { formData } from "../../types";
+import { UsernameFormFields } from "../../types";
 
 export function validateUsername(value: string | undefined): boolean {
   if (value && value.length > 5) {
@@ -23,9 +23,12 @@ export function validatePassword(value: string): boolean {
   return false;
 }
 
-export function validateFormData(formData: formData): boolean | string {
-  if (!validateEmail(formData.email)) return 'Некорректный email'
-  if (!validateUsername(formData.username)) return 'Некорректное имя пользователя'
-  if (!validatePassword(formData.password)) return 'Слишком короткий пароль'
+export function validateFormData(
+  formFields: UsernameFormFields
+): boolean | string {
+  if (!validateEmail(formFields.email)) return "Некорректный email";
+  if (!validateUsername(formFields.username))
+    return "Некорректное имя пользователя";
+  if (!validatePassword(formFields.password)) return "Слишком короткий пароль";
   return true;
 }

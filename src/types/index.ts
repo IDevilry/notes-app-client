@@ -1,4 +1,4 @@
-export interface formData {
+export interface UsernameFormFields {
   username?: string;
   email: string;
   password: string;
@@ -25,21 +25,9 @@ export interface Note {
   favoritedBy?: User;
   author?: User;
   addedToFavoriteTimes?: number;
-  category?: Category;
+  category?: string;
 }
 
 export interface Notes {
   notes?: Note[];
 }
-
-export type Category =
-  | "Web Technologies"
-  | "Web API"
-  | "HTML"
-  | "CSS"
-  | "JS"
-  | "TS"
-  | "React"
-  | "Redux"
-  | "Testing"
-  | "Node JS";

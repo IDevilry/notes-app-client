@@ -1,24 +1,22 @@
 import React, { useState } from "react";
-import { formData } from "../../types";
+import { UsernameFormFields } from "../../types";
 import { validateFormData } from "../../utils";
 import { Button, Form, Input } from "../../components/shared";
 import { useMutation } from "@apollo/client";
 import { SIGN_UP } from "../../apollo";
 import { useNavigate } from "react-router-dom";
 
-
 const SignUp: React.FC = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [signUp, { error }] = useMutation(SIGN_UP, {
     onCompleted: (data) => {
       localStorage.setItem("token", `Bearer ${data.signUp}`);
-      navigate('/')
+      navigate("/");
     },
   });
 
-  const [formData, setFormData] = useState<formData>({
+  const [formFields, setFormFields] = useState<UsernameFormFields>({
     username: "",
     email: "",
     password: "",
@@ -28,21 +26,19 @@ const SignUp: React.FC = () => {
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setValidateError("");
-    setFormData({
-      ...formData,
+    setFormFields({
+      ...formFields,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    const isValid = validateFormData(formData);
+    const isValid = validateFormData(formFields);
     if (isValid === true) {
       signUp({
         variables: {
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
+          ...formFields,
         },
       });
     } else {
@@ -50,8 +46,8 @@ const SignUp: React.FC = () => {
     }
   };
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    e.key === 'Enter' ? handleSubmit : null
-  }
+    e.key === "Enter" ? handleSubmit : null;
+  };
 
   return (
     <div className="">

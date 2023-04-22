@@ -44,6 +44,7 @@ export const USER_FAVORITE_NOTES = gql`
         id
         title
         content
+        category
         author {
           username
         }

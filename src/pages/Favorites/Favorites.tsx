@@ -1,24 +1,22 @@
 import React from "react";
 
-import { Note } from "../../types";
-import { ApolloError } from "@apollo/client";
+import { Notes } from "../../types";
+import { useQuery } from "@apollo/client";
 import { NoteList } from "../../components/modules";
+import { USER_FAVORITE_NOTES } from "../../apollo";
 
-type FavoritesProps = {
-  notes?: Note[];
-  loading?: boolean;
-  error?: ApolloError;
-};
-
-const Favorites: React.FC<FavoritesProps> = ({ notes, loading, error }) => {
+const Favorites: React.FC = () => {
+  const { data, loading, error } = useQuery<{ user: Notes }>(
+    USER_FAVORITE_NOTES
+  );
   return (
     <div>
       {loading && <p>Загрузка...</p>}
       {error && <p>Ошибка</p>}
-      {notes?.length === 0 && (
+      {data?.user?.notes?.length === 0 && (
         <p>Вы не добавили ни одной заметки в избранное</p>
       )}
-      <NoteList note={notes} />
+      <NoteList notes={data?.user?.notes || []} />
     </div>
   );
 };
