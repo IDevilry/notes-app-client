@@ -1,12 +1,15 @@
 import { useMutation } from "@apollo/client";
 import { DELETE_NOTE, NOTES } from "../../../apollo";
+import { ButtonHTMLAttributes } from "react";
+
 import Button from "../Button/Button";
 
 type DeleteNoteProps = {
   id: string;
+  otherProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 };
 
-const DeleteNoteButton: React.FC<DeleteNoteProps> = ({ id }) => {
+const DeleteNoteButton: React.FC<DeleteNoteProps> = ({ id, ...otherProps }) => {
   if (!id) {
     throw new Error("ID not found");
   }
@@ -23,6 +26,7 @@ const DeleteNoteButton: React.FC<DeleteNoteProps> = ({ id }) => {
       type="button"
       variant="secondary"
       handleClick={() => handleDeleteNote(id)}
+      {...otherProps}
     >
       X
     </Button>

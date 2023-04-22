@@ -23,6 +23,9 @@ export const NOTE_BY_ID = gql`
       title
       content
       category
+      author {
+        username
+      }
       addedToFavoriteTimes
       createdAt
     }

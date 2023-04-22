@@ -1,15 +1,20 @@
+import { NavLink } from "react-router-dom";
+import { useMemo } from "react";
+
+import { Note } from "../../../types";
+
 import Like from "../../../assets/like.svg";
 import Button from "../Button/Button";
 import DeleteNoteButton from "../DeleteNoteButton/DeleteNote";
 
-import { Note } from "../../../types";
-import { NavLink } from "react-router-dom";
-import { useMemo } from "react";
+type toggleParams = {
+  variables: { id: string };
+};
 
 type NoteCardProps = {
   note?: Note;
   userNotes: Note[];
-  toggleFavorite: ({ variables }: { variables: { id: string } }) => void;
+  toggleFavorite: ({ variables }: toggleParams) => void;
 };
 
 const NoteCard: React.FC<NoteCardProps> = ({
@@ -26,12 +31,14 @@ const NoteCard: React.FC<NoteCardProps> = ({
     title,
     category,
   } = note;
+
   const filteredNotes = useMemo(
     () => userNotes?.find((note) => note.id === id),
     [id, userNotes]
   );
 
   const date = new Date(createdAt || "").toLocaleString();
+
   return (
     <div className="flex flex-col w-[500px] m-5 text-white">
       <div className="p-6 rounded-t-[10px] bg-[#515662]">

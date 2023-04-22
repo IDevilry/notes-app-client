@@ -31,7 +31,7 @@ const NoteList: React.FC<NoteListProps> = ({ notes = [] }) => {
           toggleFavorite={toggleFavorite}
           key={note?.id}
           note={note}
-          userNotes={userFavoriteNotes?.user.notes || []}
+          userNotes={userFavoriteNotes?.user?.notes || []}
         />
       ))}
     </ul>

@@ -18,7 +18,9 @@ const SingleNote = () => {
 
   if (error || !data) {
     return <p>Error...</p>;
-  } else return <NoteList notes={[data?.note]} />;
+  }
+  
+  return <NoteList notes={[data?.note]} />;
 };
 
 export default SingleNote;

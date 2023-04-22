@@ -1,7 +1,7 @@
 import { NavLink } from "../../shared";
 
 type HeaderProps = {
-  id: string | undefined;
+  id: string | "";
 };
 
 const Header = ({ id }: HeaderProps) => {

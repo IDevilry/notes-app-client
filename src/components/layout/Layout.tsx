@@ -7,7 +7,7 @@ const Layout: React.FC = () => {
   return (
     <div>
       <div>
-        <Header id={id} />
+        <Header id={id || ''} />
         <main className="max-w-[1170px] mx-auto mt-[50px]">
           <Outlet />
         </main>
