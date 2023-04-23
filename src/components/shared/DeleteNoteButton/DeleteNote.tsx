@@ -13,11 +13,18 @@ const DeleteNoteButton: React.FC<DeleteNoteProps> = ({ id, ...otherProps }) => {
   if (!id) {
     throw new Error("ID not found");
   }
-  const [deleteNote] = useMutation(DELETE_NOTE);
+
+  const getNotes = () => ({
+    query: NOTES,
+  });
+
+  const [deleteNote] = useMutation(DELETE_NOTE, {
+    refetchQueries: [getNotes()],
+  });
+  
   const handleDeleteNote = (id: string) => {
     deleteNote({
       variables: { id },
-      refetchQueries: [{ query: NOTES }],
     });
   };
 

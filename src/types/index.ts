@@ -16,6 +16,10 @@ export interface Users {
   users: User[];
 }
 
+export interface Notes {
+  notes?: Note[];
+}
+
 export interface Note {
   id?: string;
   title?: string;
@@ -26,8 +30,4 @@ export interface Note {
   author?: User;
   addedToFavoriteTimes?: number;
   category?: string;
-}
-
-export interface Notes {
-  notes?: Note[];
 }
