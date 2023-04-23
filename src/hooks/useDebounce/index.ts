@@ -4,7 +4,8 @@ export function useDebounce<T>(
   callback: (...args: T[]) => void,
   delay: number
 ): Function {
-  let timer: NodeJS.Timeout;
+
+  let timer: ReturnType<typeof setTimeout>;
 
   return function debouncedCallback(...args: T[]) {
     if (timer) {
